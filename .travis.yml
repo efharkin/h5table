@@ -6,4 +6,4 @@ python:
 install:
   - pip install .
 script:
-  - python -m unittest h5table
+  - python -m unittest h5table.h5table_test

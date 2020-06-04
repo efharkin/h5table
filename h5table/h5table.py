@@ -9,7 +9,7 @@ COLNAMEATTR = '__colnames'
 COLTYPEATTR = '__coltypes'
 
 
-def saveH5Table(filename_or_h5group, dataset_name, dataframe):
+def save_dataframe(filename_or_h5group, dataset_name, dataframe):
     """Save a DataFrame in an HDF5 file.
 
     Store column names and dtypes in special meta-attributes for loading with
@@ -33,10 +33,10 @@ def saveH5Table(filename_or_h5group, dataset_name, dataframe):
     """
     if isinstance(filename_or_h5group, str):
         with h5.File(filename_or_h5group, 'a') as f:
-            _save_table_to_h5group(f, dataset_name, dataframe)
+            _save_dataframe_to_h5group(f, dataset_name, dataframe)
             f.close()
     elif isinstance(filename_or_h5group, h5.Group):
-        _save_table_to_h5group(filename_or_h5group, dataset_name, dataframe)
+        _save_dataframe_to_h5group(filename_or_h5group, dataset_name, dataframe)
     else:
         raise TypeError(
             'Expected argument `filename_or_h5group` to be str '
@@ -46,7 +46,7 @@ def saveH5Table(filename_or_h5group, dataset_name, dataframe):
         )
 
 
-def _save_table_to_h5group(h5group, dataset_name, dataframe):
+def _save_dataframe_to_h5group(h5group, dataset_name, dataframe):
     """Save a DataFrame to an h5py.Dataset."""
     h5group.create_dataset(
         dataset_name,
@@ -61,7 +61,7 @@ def _save_table_to_h5group(h5group, dataset_name, dataframe):
     )
 
 
-def loadH5Table(filename_or_h5group, dataset_name):
+def load_dataframe(filename_or_h5group, dataset_name):
     """Load a DataFrame from an HDF5 file.
 
     Loads DataFrame contents, column names, and data types according to
@@ -94,10 +94,10 @@ def loadH5Table(filename_or_h5group, dataset_name):
     """
     if isinstance(filename_or_h5group, str):
         with h5.File(filename_or_h5group, 'r') as f:
-            dframe = _load_h5table_from_h5group(f, dataset_name)
+            dframe = _load_dataframe_from_h5group(f, dataset_name)
             f.close()
     elif isinstance(filename_or_h5group, h5.Group):
-        dframe = _load_h5table_from_h5group(filename_or_h5group, dataset_name)
+        dframe = _load_dataframe_from_h5group(filename_or_h5group, dataset_name)
     else:
         raise TypeError(
             'Expected argument `filename_or_h5group` to be str '
@@ -109,7 +109,7 @@ def loadH5Table(filename_or_h5group, dataset_name):
     return dframe
 
 
-def _load_h5table_from_h5group(h5group, dataset_name):
+def _load_dataframe_from_h5group(h5group, dataset_name):
     if COLNAMEATTR not in h5group[dataset_name].attrs.keys():
         raise AttributeError(
             'Missing column name attribute `{}`. Was this dataset '

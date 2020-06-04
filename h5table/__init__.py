@@ -1,4 +1,4 @@
-__version__ = '0.0.2'
+__version__ = '0.0.3'
 __author__ = 'Emerson Harkin'
 
-from .h5table import loadH5Table, saveH5Table
+from .h5table import load_dataframe, save_dataframe

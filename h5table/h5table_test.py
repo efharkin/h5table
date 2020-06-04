@@ -21,8 +21,8 @@ class SaveToH5pyFile(unittest.TestCase):
             'Height': [1.1, 2.2]
         })
 
-        h5table.saveH5Table(self.f, 'dataset', dframe)
-        loaded = h5table.loadH5Table(self.f, 'dataset')
+        h5table.save_dataframe(self.f, 'dataset', dframe)
+        loaded = h5table.load_dataframe(self.f, 'dataset')
 
         self.assertTrue(
             dframe.equals(loaded),
@@ -52,8 +52,8 @@ class SaveToH5pyGroup(unittest.TestCase):
             'Height': [1.1, 2.2]
         })
 
-        h5table.saveH5Table(self.f[self.group_name], 'dataset', dframe)
-        loaded = h5table.loadH5Table(self.f[self.group_name], 'dataset')
+        h5table.save_dataframe(self.f[self.group_name], 'dataset', dframe)
+        loaded = h5table.load_dataframe(self.f[self.group_name], 'dataset')
 
         self.assertTrue(
             dframe.equals(loaded),
@@ -81,8 +81,8 @@ class SaveToNamedFile(unittest.TestCase):
             'Height': [1.1, 2.2]
         })
 
-        h5table.saveH5Table(self.fname, 'dataset', dframe)
-        loaded = h5table.loadH5Table(self.fname, 'dataset')
+        h5table.save_dataframe(self.fname, 'dataset', dframe)
+        loaded = h5table.load_dataframe(self.fname, 'dataset')
 
         self.assertTrue(
             dframe.equals(loaded),

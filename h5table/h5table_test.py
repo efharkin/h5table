@@ -18,7 +18,8 @@ class SaveToH5pyFile(unittest.TestCase):
         dframe = pd.DataFrame({
             'Name': ['Emerson', 'Harkin'],
             'Age': [1, 2],
-            'Height': [1.1, 2.2]
+            'Height': [1.1, 2.2],
+            'GenderWoman': [False, True]
         })
 
         h5table.save_dataframe(self.f, 'dataset', dframe)
@@ -49,7 +50,8 @@ class SaveToH5pyGroup(unittest.TestCase):
         dframe = pd.DataFrame({
             'Name': ['Emerson', 'Harkin'],
             'Age': [1, 2],
-            'Height': [1.1, 2.2]
+            'Height': [1.1, 2.2],
+            'GenderWoman': [False, True]
         })
 
         h5table.save_dataframe(self.f[self.group_name], 'dataset', dframe)
@@ -78,7 +80,8 @@ class SaveToNamedFile(unittest.TestCase):
         dframe = pd.DataFrame({
             'Name': ['Emerson', 'Harkin'],
             'Age': [1, 2],
-            'Height': [1.1, 2.2]
+            'Height': [1.1, 2.2],
+            'GenderWoman': [False, True]
         })
 
         h5table.save_dataframe(self.fname, 'dataset', dframe)

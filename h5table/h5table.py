@@ -126,7 +126,15 @@ def _load_dataframe_from_h5group(h5group, dataset_name):
         )
     else:
         coltypes = json.loads(h5group[dataset_name].attrs[COLTYPEATTR])
+
+        # Try type conversion
         try:
+            # Handle boolean conversion
+            for colnum, coltype in enumerate(coltypes):
+                if np.dtype(coltype) == np.bool_:
+                    dframe.iloc[:, colnum] = dframe.iloc[:, colnum] == 'True'
+
+            # Convert other columns
             dframe = dframe.astype(
                 {cn: np.dtype(ct) for cn, ct in zip(colnames, coltypes)}
             )
